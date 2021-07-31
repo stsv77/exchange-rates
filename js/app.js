@@ -10,6 +10,7 @@ const update = {
         sellRate: '98,74',
     },
 };
+
 function updateExchangeRates (updateCourses){
     document.getElementById('date').textContent = updateCourses.date;
     document.getElementById('usd-buy-rate').textContent = updateCourses.usd.buyRate;
@@ -17,4 +18,13 @@ function updateExchangeRates (updateCourses){
     document.getElementById('eur-buy-rate').textContent = updateCourses.eur.buyRate;
     document.getElementById('eur-sell-rate').textContent = updateCourses.eur.sellRate;
 }
-updateExchangeRates(update);
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://localhost:9999/api/hw13');
+xhr.send();
+xhr.onload = some;
+
+function some(evt){
+    const data = JSON.parse(evt.target.responseText);
+    updateExchangeRates(data);
+}
